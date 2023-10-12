@@ -4,7 +4,7 @@ Created on 12 oct. 2023
 @author: agusn
 '''
 
-
+import doctest
 
 
 
@@ -27,7 +27,8 @@ def cesar_encoder(contraseña,clave):
             
             while unicode+clave>122:
                 unicode-=26
-            
+            while unicode+clave<97:
+                unicode+=26
             contraseña_codificada+=chr(unicode+clave).lower()
             
             
@@ -38,7 +39,8 @@ def cesar_encoder(contraseña,clave):
             
             while unicode+clave>90:
                 unicode-=26
-            
+            while unicode+clave<65:
+                unicode+=26
             contraseña_codificada+=chr(unicode+clave).upper()
             
             
@@ -49,8 +51,13 @@ def cesar_encoder(contraseña,clave):
             
             while unicode_int+clave>57:
                 unicode-=9
+            while unicode_int+clave<48:
+                unicode+=9
             
             contraseña_codificada+=chr(unicode_int+clave).upper()
+            
+            
+            
             
 
     
