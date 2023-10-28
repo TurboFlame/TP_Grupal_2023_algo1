@@ -5,7 +5,7 @@ Created on 12 oct. 2023
 '''
 
 import doctest
-from reemplaza_ñ import reemplazador_ñ
+from funciones_auxiliares import reemplazador_ñ
 
 
 
@@ -37,15 +37,15 @@ def cesar_encoder(contraseña,clave):
     
     
     contraseña_codificada=""
-    
+    letras_invalidas="áéíóúÁÉÍÓÚ"
 
     for letra in contraseña:
-        if letra.islower():
+        if letra.islower() and not letra in letras_invalidas:
             
             unicode=ord(letra)
             contraseña_codificada+=chr(97+(unicode+clave-97)%26).lower()
             
-        elif letra.isupper():
+        elif letra.isupper() and not letra in letras_invalidas:
             
             unicode=ord(letra)
             contraseña_codificada+=chr(65+(unicode+clave-65)%26).upper()
@@ -69,5 +69,13 @@ def cesar_encoder(contraseña,clave):
 
     
     return contraseña_codificada
-#hola
-#hola cambia algo ??
+
+print(doctest.testmod())
+
+
+
+#Funcion creada por Agustin Reyes
+#Esta funcion tiene el proposito de desplazar los caracteres ingresados a la derecha o izquierda en el abecedario o
+#la serie de numeros del 0 al 9 y devolver un string con estos caracteres.
+# La cantidad de espacios y el sentido en que se desplazan es determinado por la clave ingresada.
+# Caracteres que no sean digitos o letras del abecedario permanecen sin cambios.
