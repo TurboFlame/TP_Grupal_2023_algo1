@@ -3,9 +3,19 @@ Created on 22 oct. 2023
 
 @author: agusn
 '''
+import doctest
 
+"""
+>>>reemplazador_ñ("ñññ")
+'ninini'
+>>>reemplazador_ñ("ÑÑÑ")
+'NININI'
+>>>reemplazador_ñ("ñandu")
+'niandu'
+>>>reemplazador_ñ("buenas tardes")
+'buenas tardes'
 
-
+"""
 def reemplazador_ñ(palabra):
     nuevo_string=""
     for letra in palabra:
@@ -20,6 +30,5 @@ def reemplazador_ñ(palabra):
 #Agustin Reyes
 #El proposito de esta funcion es recibir un string y devolverlo luego de 
 #intercambiar los caracteres "ñ" o "Ñ" por "ni" o "NI" respectivamente.
-
 
 

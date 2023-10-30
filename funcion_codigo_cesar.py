@@ -11,8 +11,8 @@ from funciones_auxiliares import reemplazador_ñ
 
 def cesar_encoder(contraseña,clave):
     """
-    >>> cesar_encoder("hola", 5)
-    'mtqf'
+    >>> cesar_encoder("holaááá", 5)
+    'mtqfááá'
     >>> cesar_encoder("aña",42)
     'qdyq'
     >>> cesar_encoder("5644", 3)
@@ -23,8 +23,8 @@ def cesar_encoder(contraseña,clave):
     '9'
     >>> cesar_encoder("AÑA", -4)
     'WJEW'
-    >>> cesar_encoder("hola buenos dias", 50000)
-    'jqnc dwgpqu fkcu'
+    >>> cesar_encoder("hola buenos diás", 50000)
+    'jqnc dwgpqu fkáu'
     >>> cesar_encoder("HOLA QUE TAL", -50000)
     'FMJY OSC RYJ'
     >>> cesar_encoder("al_GORIT-m0s_1", 5)
@@ -70,7 +70,6 @@ def cesar_encoder(contraseña,clave):
     
     return contraseña_codificada
 
-print(doctest.testmod())
 
 
 
