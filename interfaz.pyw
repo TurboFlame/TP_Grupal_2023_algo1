@@ -66,6 +66,41 @@ def caracteres_especiales():
     }
 
 def Cifrado_Atbash(mensaje):
+    """
+    Esta función se dedica a leer los caracteres de un mensaje y aplicar en cada uno el cifrado de Atbash.
+
+    Las siguientes pruebas aplican Atbash al mensaje ingresado:
+
+    >>> Cifrado_Atbash("Hola Mundo 12345")
+    'sLOZ nFMWL 87654'
+
+    >>> Cifrado_Atbash("Somos el grupo Losanges!!")
+    'hLNLH VO TIFKL oLHZMTVH!!'
+
+    >>> Cifrado_Atbash("Bienvenido al código Atbash de nuestro proyecto!")
+    'yRVMEVMRWL ZO XMWRTL zGYZHS WV MFVHGIL KILBVXGL!'
+
+    >>> Cifrado_Atbash("¿Qué prueba te gustaría realizar primero?")
+    '¿jFV KIFVYZ GV TFHGZIRZ IVZORAZI KIRNVIL?'
+
+    >>> Cifrado_Atbash("hoy es un lindo día para programar")
+    'SLB VH FM ORMWL WRZ KZIZ KILTIZNZI'
+
+    >>> Cifrado_Atbash("hay muchos ñandues que cazar")
+    'SZB NFXSLH niZMWFVH JFV XZAZI'
+
+    >>> Cifrado_Atbash("@@@!!??**42")
+    '@@@!!??**57'
+
+    >>> Cifrado_Atbash("Algoritmos y Programación 1")
+    'zOTLIRGNLH B kILTIZNZXRMM 8'
+
+    >>> Cifrado_Atbash("El mejor GRUPO DEL MUNDO@!")
+    'vO NVQLI tifkl wvo nfmwl@!'
+
+    >>> Cifrado_Atbash("En las montañas , los niños juegan")
+    'vM OZH NLMGZniZH , OLH MRniLH QFVTZM'
+    """
     especiales = caracteres_especiales()
     
     resultado = ""
