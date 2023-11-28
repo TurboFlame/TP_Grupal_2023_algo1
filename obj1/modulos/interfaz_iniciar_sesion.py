@@ -3,7 +3,7 @@ import csv
 
 def verificar_datos(usuario, contraseña):
     resultado = False
-    with open('registro4.csv', 'r') as archivo:
+    with open('obj1/modulos/registro.csv', 'r') as archivo:
         lineas = archivo.readlines()
         for linea in lineas:
             linea_nueva = linea.strip()
@@ -59,4 +59,5 @@ def crear_ventana_inicio():
 
     raiz_inicio.mainloop()
 
-crear_ventana_inicio()
+if __name__ == "__main__":
+    crear_ventana_inicio()
