@@ -226,6 +226,8 @@ comentario_inicial.place(x=25, y=25)
 boton_inicial = Button(miFrame2, text='CONTINUAR', fg='red', font='sans', command=mostrar_ventana_principal)
 boton_inicial.place(x=600, y=80)
 
+
+
 miImagen2 = PhotoImage(file='chico.png')
 foto_grupo = Label(image=miImagen2, width='800', height='450')
 foto_grupo.place(x=310, y=180)
