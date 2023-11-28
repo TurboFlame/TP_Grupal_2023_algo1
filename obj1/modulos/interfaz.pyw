@@ -1,6 +1,6 @@
 from tkinter import *
 from atbash_cesar import cifrar_atbash, cifrar_cesar
-
+from igu_enviado_mensajes import *
 from interfaz_registro import crear_ventana_registro
 from interfaz_iniciar_sesion import crear_ventana_inicio
 
@@ -53,7 +53,8 @@ def mostrar_ventana_principal(raiz2):
     limpieza = Button(miFrame, text='Limpiar', command=limpiar_cuadros)
     limpieza.place(x=300, y=450)
     #limpieza.grid(row=4, column=0, padx=10, pady=10)
-
+    boton_enviado=Button(miFrame,text="Enviar mensajes",command=interfaz_enviado_mensajes)
+    boton_enviado.place(x=280,y=490)
     def cifrar_mensaje_cesar():
         mensaje = mensaje_entry.get()
         clave = int(clave_entry.get())
