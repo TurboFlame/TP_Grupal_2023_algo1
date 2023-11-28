@@ -14,7 +14,7 @@ def guardar_registro(entrada_usuario, entrada_contraseña, pregunta, entrada_res
  
 
     if validar_usuario(usuario) and validar_clave(contraseña):
-        with open('registro4.csv', 'a', newline='') as archivo:
+        with open('obj1/modulos/registro.csv', 'a', newline='') as archivo:
             escritor_csv = csv.writer(archivo)
             escritor_csv.writerow([usuario, contraseña, pregunta_seleccionada, respuesta])
 
@@ -23,12 +23,12 @@ def guardar_registro(entrada_usuario, entrada_contraseña, pregunta, entrada_res
         label_registro.config(text="Registro fallido", fg='red')
 
 def crear_ventana_registro():
-    raiz = Tk()
-    raiz.title('Registro de Usuario')
-    raiz.geometry('1000x500')
-    raiz.config(bg='LightSkyBlue2', relief='ridge', bd=35, width=300, height=150)
+    raiz5 = Tk()
+    raiz5.title('Registro de Usuario')
+    raiz5.geometry('1000x500')
+    raiz5.config(bg='LightSkyBlue2', relief='ridge', bd=35, width=300, height=150)
 
-    frame_principal = Frame(raiz, bg='Snow2', bd=5, relief='sunken', width=400, height=300)
+    frame_principal = Frame(raiz5, bg='Snow2', bd=5, relief='sunken', width=400, height=300)
     frame_principal.pack(expand=True)
 
     frame_interno = Frame(frame_principal, bg='Snow2')
@@ -71,6 +71,7 @@ def crear_ventana_registro():
     boton_registrar = Button(frame_interno, text="Registrarse", command=lambda: guardar_registro(entrada_usuario, entrada_contraseña, pregunta, entrada_respuesta,label_registro), font=('Arial', 14))
     boton_registrar.grid(row=5, column=0, columnspan=10, pady=10)
 
-    raiz.mainloop()
-
-crear_ventana_registro()
+    raiz5.mainloop()
+    
+if __name__ == "__main__":
+    crear_ventana_registro()
