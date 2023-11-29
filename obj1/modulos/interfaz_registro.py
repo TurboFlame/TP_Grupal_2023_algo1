@@ -1,18 +1,21 @@
 from tkinter import *
-
-
-from validar import validar_usuario #funcion validar usuario
-from validar import validar_clave #funcion validar clave
+from validar import validar_usuario, validar_clave
 import csv
 
-def usuario_existente(usuario):
-    resultado=False
-    with open('obj1/modulos/registro.csv', 'r', newline='') as archivo:
-        linea_csv = csv.reader(archivo)
-        for fila in linea_csv:
-            if fila and fila[0] == usuario:
-                resultado=True
-    return resultado
+def usuario_existente(nombre_usuario): #funcion para verificar si el usuario ya está registrado
+    usuarios_existentes = {}
+    
+    try:
+        with open('registro4.csv', 'r') as archivo:
+            lector_csv = csv.reader(archivo)
+            for fila in lector_csv:
+                usuarios_existentes[fila[0]] = True
+                   
+
+    except FileNotFoundError:
+        pass  # maneja el caso en el que el archivo no existe
+
+    return nombre_usuario in usuarios_existentes
 
 def guardar_registro(entrada_usuario, entrada_contraseña, pregunta, entrada_respuesta, label_registro):
     usuario = entrada_usuario.get()
@@ -20,16 +23,27 @@ def guardar_registro(entrada_usuario, entrada_contraseña, pregunta, entrada_res
     pregunta_seleccionada = pregunta.get()
     respuesta = entrada_respuesta.get()
 
-    if usuario_existente(usuario):
-        label_registro.config(text="Usuario ya existe", fg='red')
-    elif   validar_usuario(usuario) and validar_clave(contraseña):
-        with open('obj1/modulos/registro.csv', 'a', newline='') as archivo:
+    if not validar_usuario(usuario):
+        label_registro.config(text="Nombre de usuario inválido", fg='red')
+    elif usuario_existente(usuario):
+        label_registro.config(text="El usuario ya está en uso", fg='red')
+    elif not validar_clave(contraseña):
+        label_registro.config(text="Contraseña inválida", fg='red')
+    else:
+        with open('registro4.csv', 'a', newline='') as archivo:
             escritor_csv = csv.writer(archivo)
             escritor_csv.writerow([usuario, contraseña, pregunta_seleccionada, respuesta])
+
         label_registro.config(text="Registro correcto", fg='green')
-    else:
-        label_registro.config(text="Usuario o contraseña no válidos", fg='red')
-    
+        
+#funion para guardar las preguntas para recuperar contraseña en un archivo csv
+def guardar_preguntas_en_csv(preguntas, archivo='preguntas.csv'):
+    with open('preguntas.csv', 'w', newline='') as archivo:
+        writer = csv.writer(archivo)
+        writer.writerow(['Pregunta'])
+        for pregunta in preguntas:
+            writer.writerow([pregunta])
+
 def crear_ventana_registro():
     raiz5 = Tk()
     raiz5.title('Registro de Usuario')
@@ -58,9 +72,13 @@ def crear_ventana_registro():
     label_pregunta.grid(row=2, column=0, padx=10, pady=10, sticky='e')
 
     opciones_pregunta = ['Seleccionar una pregunta', 'Nombre de tu mejor amigo/amiga', 'Nombre de tu mascota', 'Cantante preferido', 'Ciudad preferida',
-                         'Apellido De Abuela Materna','Color Favorito','Deporte Favorito','Genero de Musica Favorito','Deporte Preferido','Cancion Favorita','Nombre de Tu Madre']
+                        'Apellido De Abuela Materna','Color Favorito','Deporte Favorito','Genero de Musica Favorito','Deporte Preferido','Cancion Favorita','Nombre de Tu Madre']
+
     pregunta = StringVar()
     pregunta.set(opciones_pregunta[0])
+
+    # Guardar las preguntas en el archivo preguntas.csv
+    guardar_preguntas_en_csv(opciones_pregunta)
 
     pregunta_desplegable = OptionMenu(frame_interno, pregunta, *opciones_pregunta)
     pregunta_desplegable.config(font=('Arial', 14))
@@ -71,8 +89,7 @@ def crear_ventana_registro():
 
     entrada_respuesta = Entry(frame_interno, font=('Arial', 14))
     entrada_respuesta.grid(row=3, column=1, padx=10, pady=10)
-    
-    
+
     label_registro = Label(frame_interno, text='', font=('Arial', 16), bg='Snow2', fg='red')
     label_registro.grid(row=7, column=0, columnspan=5, pady=10)
 
@@ -80,6 +97,6 @@ def crear_ventana_registro():
     boton_registrar.grid(row=5, column=0, columnspan=10, pady=10)
 
     raiz5.mainloop()
-    
+
 if __name__ == "__main__":
     crear_ventana_registro()
