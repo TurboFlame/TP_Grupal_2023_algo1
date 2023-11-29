@@ -3,7 +3,7 @@ import csv
 
 from interfaz_iniciar_sesion import verificar_datos
 
-def recuperacion_contraseña():
+def recuperacion_contraseña(usuario="Placeholder"):
     raiz_recuperacion_contraseña=Tk()
     raiz_recuperacion_contraseña.title('RECUPERACION DE CLAVE')
     raiz_recuperacion_contraseña.geometry('1000x500')
@@ -12,54 +12,97 @@ def recuperacion_contraseña():
 
     frame_recuperacion_contraseña=Frame()
     frame_recuperacion_contraseña.pack()
-    frame_recuperacion_contraseña.config(width='1400', height='1000', bg='sky blue', relief='sunken', bd=35)
+    frame_recuperacion_contraseña.config(width='1000', height='500', bg='sky blue', relief='sunken', bd=35)
 
+
+
+    intentos=3
     #INTRODUCIR AL TEXT LA FUNCION QUE RETORNE LA PREGUNTA AL USUARIO ASIGNADO CSV
     comentario_recuperacion_contraseña=Label(frame_recuperacion_contraseña, text=None).place(x=100 ,y=50 )
     comentario_recuperacion_contraseña=Label(frame_recuperacion_contraseña, text='Introduzca la respuesta:', font=('Arial', 12)).place(x=100 ,y=150 )
-    respuesta_de_usuario_recuperacion_contraseña= Entry(frame_recuperacion_contraseña, width=80).place(x=100 ,y=200 )
-
-
-    def boton_recuperacion_contraseña(respuesta):
-        # INTRODUCIR FUNCION QUE RECORRA EL ARCHIVO CSV
-        respuesta = False
-        with open('registro.csv', 'r') as archivo:
-            lineas = csv.reader(archivo)
-            
-            
-            for linea in lineas:
-                
-                if linea[3] == respuesta:
-                    resultado = True
-                    #ABRIR INTEFAZ DE CODIGO CESAR Y ATBASH CON ENVIO DE CODIGOS
-                else:
-                    ventana_emergente()
-        return resultado
+    
+    
+    
+    
+    comentario_intentos=Label(frame_recuperacion_contraseña, text="Tiene " + str(intentos) +" intentos restantes").place(x=300,y=150)
+    
+    
+    
+    
+    respuesta_de_usuario_recuperacion_contraseña= Entry(frame_recuperacion_contraseña, width=80)
+    respuesta_de_usuario_recuperacion_contraseña.place(x=100,y=200)
+    
+    
+    
+    
+    
+    print(verificar_datos(usuario)[2])
+    texto_pregunta=Label(frame_recuperacion_contraseña,text=verificar_datos(usuario)[2])
+    texto_pregunta.place(x=150,y=240)
+    
+    boton_recuperar= Button(frame_recuperacion_contraseña,text="Recuperar contraseña",command=lambda:contraseña_correcta(verificar_datos(usuario)[1]) if checkear_respuesta(usuario,respuesta_de_usuario_recuperacion_contraseña.get())else intentos-1
+    
+    
+    boton_recuperar.place(x=150,y=200)
+    
+    
+    raiz_recuperacion_contraseña.mainloop()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+def checkear_respuesta(usuario,entrada_respuesta):
+    
+    datos=verificar_datos(usuario)
+    
+    contraseña=datos[1]
+    respuesta=datos[3]  
+    contraseña_valida=False
+    
+    if respuesta==entrada_respuesta:
+        
+        contraseña_valida=True
+    
+        
+    return contraseña_valida    
+        
+          
+        
+    
+    
+def contraseña_correcta(contraseña):
+    print()    
+    
+def contraseña_incorrecta(intentos):
+    print()    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     
-    def ventana_emergente():
-        raiz_recuperacion_contraseña.withdraw()
-        raiz_ventana_emergente = Tk()
-        raiz_ventana_emergente.title('TP Grupal Parte 1 - Grupo: Losange')
-        raiz_ventana_emergente.iconbitmap('losange.ico')
-        raiz_ventana_emergente.geometry('1000x500')
-        raiz_ventana_emergente.config(bg='blue', relief='groove', bd=45)
-        raiz_ventana_emergente.resizable(0, 0)
-
-        frame_ventana_emergente = Frame(raiz_ventana_emergente)
-        frame_ventana_emergente.pack()
-        frame_ventana_emergente.config(bg='sky blue', relief='sunken', bd=35)
-
-        mensaje_label = Label(frame_ventana_emergente, text='Tiene en total 3 intentos', font=('Arial', 12).place(x=100 ,y=400 ))
-
-        def cierre_ventana_emergente():
-            ventana_emergente.withdraw()
-
-        boton_ventana_emergente=Button(frame_ventana_emergente, text='CONTINUAR', font='sans', command=cierre_ventana_emergente).place(x=300 ,y=400 )
+    
         
-    boton_recuperacion_contraseña=Button(frame_recuperacion_contraseña, text='CONTINUAR', font='sans', command=boton_recuperacion_contraseña).place(x=400 ,y=300 )
 
 
-    raiz_recuperacion_contraseña.mainloop()
+
+
+
+
+
+
+
+
+
 
 recuperacion_contraseña()

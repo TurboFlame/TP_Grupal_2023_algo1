@@ -3,15 +3,15 @@ from tkinter import *
 import csv
 
 
-def verificar_datos(usuario, contraseña):
+def verificar_datos(usuario):
     resultado = False
     pregunta = ""
     contraseña_correcta = ""
-    lista_retornable=[]
+    lista_retornable=[None,None,None,None,None]
     with open('registro.csv', 'r') as archivo:
         lineas = csv.reader(archivo)
         for linea in lineas:
-            print(linea[0] + usuario)
+            
 
             if linea[0] == usuario:
                 resultado = True
@@ -21,7 +21,7 @@ def verificar_datos(usuario, contraseña):
         
         lista_retornable.append(resultado)
         
-        
+       
         
     return lista_retornable
 
@@ -32,7 +32,8 @@ def verificar(entry_usuario_inicio, entry_contraseña_inicio, resultado_label_in
     usuario = entry_usuario_inicio.get()
     contraseña = entry_contraseña_inicio.get()
     datos=[None,None,None,None,None]
-    datos = verificar_datos(usuario, contraseña)
+    datos = verificar_datos(usuario)
+    print(datos)
     
     usuario_datos=datos[0]
     contraseña_datos=datos[1]
