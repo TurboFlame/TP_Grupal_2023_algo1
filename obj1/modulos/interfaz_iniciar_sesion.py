@@ -1,5 +1,6 @@
 from tkinter import *
 from interfaz_registro import crear_ventana_registro
+from interfaz_recuperacion1 import crear_ventana
 import csv
 
 
@@ -43,16 +44,7 @@ def verificar(entry_usuario_inicio, entry_contraseña_inicio, resultado_label_in
         
         boton_registrarse_inicio.grid()
         boton_recuperar_inicio.grid_remove()
-        
-def crear_ventana():
-    ventana = Tk()
-    ventana.title("ventana de recuperacion")
-    
-    
-    marco = Frame(ventana)
-    marco.pack(padx=10, pady=10)
 
-    ventana.mainloop()
 
     
 
@@ -85,7 +77,7 @@ def crear_ventana_inicio():
     boton_registrarse_inicio.grid(row=4, column=0, columnspan=2, pady=10)
     boton_registrarse_inicio.grid_remove()
 
-    boton_recuperar_inicio = Button(frame_interno, text="Recuperar Contraseña", command=lambda:crear_ventana(), font=('Arial', 14))
+    boton_recuperar_inicio = Button(frame_interno, text="Recuperar Contraseña", command=lambda : crear_ventana(), font=('Arial', 14))
     boton_recuperar_inicio.grid(row=4, column=0, columnspan=2, pady=10)
     boton_recuperar_inicio.grid_remove()
 
