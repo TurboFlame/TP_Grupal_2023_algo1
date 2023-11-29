@@ -1,4 +1,7 @@
 from tkinter import*
+import csv
+
+from interfaz_iniciar_sesion import verificar_datos
 
 def recuperacion_contraseña():
     raiz_recuperacion_contraseña=Tk()
@@ -20,12 +23,13 @@ def recuperacion_contraseña():
     def boton_recuperacion_contraseña(respuesta):
         # INTRODUCIR FUNCION QUE RECORRA EL ARCHIVO CSV
         respuesta = False
-        with open('obj1/modulos/registro.csv', 'r') as archivo:
-            lineas = archivo.readlines()
+        with open('registro.csv', 'r') as archivo:
+            lineas = csv.reader(archivo)
+            
+            
             for linea in lineas:
-                linea_nueva = linea.strip()
-                datos = linea_nueva.split(',')
-                if datos[3] == respuesta:
+                
+                if linea[3] == respuesta:
                     resultado = True
                     #ABRIR INTEFAZ DE CODIGO CESAR Y ATBASH CON ENVIO DE CODIGOS
                 else:

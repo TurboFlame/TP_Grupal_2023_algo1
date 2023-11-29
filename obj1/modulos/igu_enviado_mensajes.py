@@ -13,7 +13,7 @@ from tkinter import *
 
 
 
-def interfaz_enviado_mensajes():
+def interfaz_enviado_mensajes(usuario=None):
     
 
     raiz_enviado=Tk()
@@ -62,7 +62,7 @@ def interfaz_enviado_mensajes():
 
 
 
-    boton_enviar=Button(frame_mensajes,text="Enviar mensaje",command=lambda: agregar_mensaje(entrada_destinatario.get("1.0", "end-1c"),entrada_mensaje.get("1.0", "end-1c"),clave_codificacion.get(),entrada_clave.get("1.0", "end-1c")))
+    boton_enviar=Button(frame_mensajes,text="Enviar mensaje",command=lambda: agregar_mensaje(entrada_destinatario.get("1.0", "end-1c"),entrada_mensaje.get("1.0", "end-1c"),clave_codificacion.get(),entrada_clave.get("1.0", "end-1c"),usuario))
     boton_enviar.grid(row=4,column=0,pady=210,padx=40)
 
 
@@ -82,9 +82,9 @@ def interfaz_enviado_mensajes():
     
     
 
-def agregar_mensaje(destinatario,mensaje,codificador,clave):    
+def agregar_mensaje(destinatario,mensaje,codificador,clave,usuario):    
     
-    usuario="placeholder"
+    
 
     
     print(codificador)
@@ -122,6 +122,7 @@ def chequeo_usuario(usuario):
         lector=csv.reader(archivo_usuarios)
         coincidencia=False
         linea=next(lector,None)
+        
         while linea is not None and not coincidencia:
             
             
