@@ -2,11 +2,10 @@ from tkinter import *
 from atbash_cesar import cifrar_atbash, cifrar_cesar
 from igu_enviado_mensajes import *
 from interfaz_registro import crear_ventana_registro
-from interfaz_iniciar_sesion import crear_ventana_inicio
-
+from interfaz_iniciar_sesion import *
 # Función para mostrar la ventana principal
-def mostrar_ventana_principal():
-    
+def mostrar_ventana_principal(usuario=None):
+    print(usuario)
     raiz = Tk()
 
     raiz.title('TP Grupal Parte 1 - Grupo: Losange')
@@ -53,7 +52,7 @@ def mostrar_ventana_principal():
     limpieza = Button(miFrame, text='Limpiar', command=limpiar_cuadros)
     limpieza.place(x=300, y=450)
     #limpieza.grid(row=4, column=0, padx=10, pady=10)
-    boton_enviado=Button(miFrame,text="Enviar mensajes",command=interfaz_enviado_mensajes)
+    boton_enviado=Button(miFrame,text="Enviar mensajes",command=lambda:interfaz_enviado_mensajes(usuario))
     boton_enviado.place(x=280,y=490)
     def cifrar_mensaje_cesar():
         mensaje = mensaje_entry.get()
@@ -93,7 +92,47 @@ def mostrar_ventana_principal():
 
     raiz.mainloop()
     
+def crear_ventana_inicio():
+    raiz_inicio = Tk()
+    raiz_inicio.title('Iniciar Sesion')
+    raiz_inicio.geometry('1000x500')
+    raiz_inicio.config(bg='LightSkyBlue2', relief='ridge', bd=35, width=300, height=150)
 
+    frame_inicio = Frame(raiz_inicio, bg='Snow1', bd=5, relief='sunken', width=400, height=300)
+    frame_inicio.pack(expand=True)
+
+    frame_interno = Frame(frame_inicio, bg='Snow2')
+    frame_interno.grid(row=0, column=0, padx=10, pady=10)
+
+    label_usuario_inicio = Label(frame_interno, text='Usuario:', font=('Arial', 16), bg='Snow2')
+    label_usuario_inicio.grid(row=0, column=0, padx=10, pady=10, sticky='e')
+
+    entry_usuario_inicio = Entry(frame_interno, font=('Arial', 14))
+    entry_usuario_inicio.grid(row=0, column=1, padx=10, pady=10)
+
+    label_contraseña_inicio = Label(frame_interno, text='Contraseña:', font=('Arial', 16), bg='Snow2')
+    label_contraseña_inicio.grid(row=1, column=0, padx=10, pady=10, sticky='e')
+
+    entry_contraseña_inicio = Entry(frame_interno, show='*', font=('Arial', 14))
+    entry_contraseña_inicio.grid(row=1, column=1, padx=10, pady=10)
+
+
+    boton_registrarse_inicio = Button(frame_interno, text="Registrarse",command=crear_ventana_registro, font=('Arial', 14))
+    boton_registrarse_inicio.grid(row=4, column=0, columnspan=2, pady=10)
+    boton_registrarse_inicio.grid_remove()
+
+    boton_recuperar_inicio = Button(frame_interno, text="Recuperar Contraseña", command=lambda:crear_ventana(), font=('Arial', 14))
+    boton_recuperar_inicio.grid(row=4, column=0, columnspan=2, pady=10)
+    boton_recuperar_inicio.grid_remove()
+
+    boton_verificar_inicio = Button(frame_interno, text="Ingresar", command=lambda: mostrar_ventana_principal(verificar(entry_usuario_inicio, entry_contraseña_inicio, resultado_label_inicio, boton_recuperar_inicio, boton_registrarse_inicio)[1])
+    if verificar(entry_usuario_inicio, entry_contraseña_inicio, resultado_label_inicio, boton_recuperar_inicio, boton_registrarse_inicio)[0]else None,font=('Arial', 14))
+    boton_verificar_inicio.grid(row=3, column=0, columnspan=2, pady=10)
+
+    resultado_label_inicio = Label(frame_interno, text='', font=('Arial', 16), bg='Snow2', fg='red')
+    resultado_label_inicio.grid(row=7, column=0, columnspan=5, pady=10)
+
+    raiz_inicio.mainloop()
 def iniciar_interfaz():
     raiz2 = Tk()
     raiz2.title('TP Grupal Parte 1 - Grupo: Losange')
@@ -134,3 +173,12 @@ def iniciar_interfaz():
     raiz2.mainloop()
 if __name__ == "__main__":
     iniciar_interfaz()
+    
+ 
+    
+    
+   
+    
+   
+    
+    
