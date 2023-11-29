@@ -5,31 +5,23 @@ from validar import validar_usuario #funcion validar usuario
 from validar import validar_clave #funcion validar clave
 import csv
 
-def usuario_existente(usuario):
-    resultado=False
-    with open('obj1/modulos/registro.csv', 'r', newline='') as archivo:
-        linea_csv = csv.reader(archivo)
-        for fila in linea_csv:
-            if fila and fila[0] == usuario:
-                resultado=True
-    return resultado
-
 def guardar_registro(entrada_usuario, entrada_contraseña, pregunta, entrada_respuesta, label_registro):
     usuario = entrada_usuario.get()
     contraseña = entrada_contraseña.get()
     pregunta_seleccionada = pregunta.get()
     respuesta = entrada_respuesta.get()
 
-    if usuario_existente(usuario):
-        label_registro.config(text="Usuario ya existe", fg='red')
-    elif   validar_usuario(usuario) and validar_clave(contraseña):
+ 
+
+    if validar_usuario(usuario) and validar_clave(contraseña):
         with open('obj1/modulos/registro.csv', 'a', newline='') as archivo:
             escritor_csv = csv.writer(archivo)
             escritor_csv.writerow([usuario, contraseña, pregunta_seleccionada, respuesta])
+
         label_registro.config(text="Registro correcto", fg='green')
     else:
-        label_registro.config(text="Usuario o contraseña no válidos", fg='red')
-    
+        label_registro.config(text="Registro fallido", fg='red')
+
 def crear_ventana_registro():
     raiz5 = Tk()
     raiz5.title('Registro de Usuario')
@@ -74,9 +66,9 @@ def crear_ventana_registro():
     
     
     label_registro = Label(frame_interno, text='', font=('Arial', 16), bg='Snow2', fg='red')
-    label_registro.grid(row=7, column=0, columnspan=5, pady=10)
+    label_registro.grid(row=7, column=0, columnspan=5, pady=10)   
 
-    boton_registrar = Button(frame_interno, text="Registrarse", command=lambda: guardar_registro(entrada_usuario, entrada_contraseña, pregunta, entrada_respuesta, label_registro), font=('Arial', 14))
+    boton_registrar = Button(frame_interno, text="Registrarse", command=lambda: guardar_registro(entrada_usuario, entrada_contraseña, pregunta, entrada_respuesta,label_registro), font=('Arial', 14))
     boton_registrar.grid(row=5, column=0, columnspan=10, pady=10)
 
     raiz5.mainloop()
