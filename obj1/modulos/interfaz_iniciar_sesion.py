@@ -22,7 +22,7 @@ def verificar_datos(usuario):
         lista_retornable.append(resultado)
         
        
-        
+        print(lista_retornable)
     return lista_retornable
 
 
