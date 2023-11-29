@@ -122,6 +122,7 @@ def chequeo_usuario(usuario):
         lector=csv.reader(archivo_usuarios)
         coincidencia=False
         linea=next(lector,None)
+        
         while linea is not None and not coincidencia:
             
             
