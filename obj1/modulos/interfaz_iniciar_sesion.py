@@ -8,7 +8,7 @@ def verificar_datos(usuario, contraseña):
     pregunta = ""
     contraseña_correcta = ""
 
-    with open('E:\\Users\\Usuario\\Downloads\\registro2.csv', 'r') as archivo:
+    with open('obj1/modulos/registro.csv', 'r') as archivo:
         lineas = archivo.readlines()
         for linea in lineas:
             linea_nueva = linea.strip()
