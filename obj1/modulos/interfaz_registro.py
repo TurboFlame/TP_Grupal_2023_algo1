@@ -101,8 +101,8 @@ def crear_ventana_registro(raiz=None):
     boton_registrar = Button(frame_interno, text="Registrarse", command=lambda: guardar_registro(entrada_usuario, entrada_contraseña, pregunta, entrada_respuesta, label_registro), font=('Arial', 14))
     boton_registrar.grid(row=5, column=0, columnspan=10, pady=10)
     
-    boton_atras=Button(frame_interno,text="Retroceder",command=lambda:retroceder(raiz,raiz_usuario))
-    boton_atras.grid(row=5,column=0)
+    boton_atras = Button(frame_interno, text="Retroceder", command=lambda: retroceder(raiz, raiz_usuario), font=('Arial', 14), fg='blue')
+    boton_atras.grid(row=5, column=0, columnspan=10, pady=10, sticky='w')
     
     
 
