@@ -12,12 +12,21 @@ def obtener_pregunta(usuario):
     return pregunta_importante
 
 def obtener_respuesta(usuario):
+    respuesta_importante = ""
+    with open('obj1/modulos/registro.csv', 'r') as archivo:
+        for linea in archivo:
+            datos = linea.strip().split(',')
+            if datos[0] == usuario:
+               respuesta_importante = datos[3]
+    return respuesta_importante
+
+def obtener_contraseña(usuario):
     contraseña_importante = ""
     with open('obj1/modulos/registro.csv', 'r') as archivo:
         for linea in archivo:
             datos = linea.strip().split(',')
             if datos[0] == usuario:
-               contraseña_importante = datos[3]
+               contraseña_importante = datos[1]
     return contraseña_importante
 
 def obtener_intentos(usuario):
@@ -45,12 +54,13 @@ def verificar_y_mostrar(entry_respuesta, resultado_label, usuario, intentos_labe
     respuesta_usuario = entry_respuesta.get()
     respuesta_correcta = obtener_respuesta(usuario)
     intentos = obtener_intentos(usuario)
+    contraseña_correcta=obtener_contraseña(usuario)
 
     if intentos >= 3:
         mensaje = "Usuario bloqueado. Demasiados intentos fallidos."
         resultado_label.config(text=mensaje, fg='red')  
     elif respuesta_usuario == respuesta_correcta:
-        mensaje = "Respuesta correcta. Contraseña: " + respuesta_correcta
+        mensaje = "Respuesta correcta. Contraseña: " + contraseña_correcta
         intentos_label.config(text="")
     else:
         mensaje = "Respuesta incorrecta"
@@ -64,7 +74,7 @@ def verificar_y_mostrar(entry_respuesta, resultado_label, usuario, intentos_labe
 def crear_interfaz_recuperacion(usuario):
     raiz_inicio = Tk()
     raiz_inicio.title('Iniciar Sesión')
-    raiz_inicio.geometry('400x200')
+    raiz_inicio.geometry('1000x500')
     raiz_inicio.config(bg='LightSkyBlue2', relief='ridge', bd=35)
 
     frame_inicio = Frame(raiz_inicio, bg='Snow1', bd=5, relief='sunken')
@@ -91,3 +101,4 @@ def crear_interfaz_recuperacion(usuario):
     boton_verificar.grid(row=1, columnspan=2, pady=10)
 
     raiz_inicio.mainloop()
+crear_interfaz_recuperacion("facundo_12") 

@@ -32,7 +32,7 @@ def guardar_registro(entrada_usuario, entrada_contraseña, pregunta, entrada_res
     else:
         with open('obj1/modulos/registro.csv', 'a', newline='') as archivo:
             escritor_csv = csv.writer(archivo)
-            escritor_csv.writerow([usuario, contraseña, pregunta_seleccionada, respuesta,0])
+            escritor_csv.writerow([usuario, contraseña, pregunta_seleccionada, respuesta, 0])
 
         label_registro.config(text="Registro correcto", fg='green')
         

@@ -31,10 +31,10 @@ def verificar(entry_usuario_inicio, entry_contraseña_inicio, resultado_label_in
     contraseña_datos=datos[1]
     pregunta_datos=datos[2]
     respuesta_datos=datos[3]
-    resultado=datos[4]
+    resultado=datos[5]
     
     if usuario==usuario_datos and contraseña != contraseña_datos:
-        resultado_label_inicio.config(text="Datos Incorrectos", fg="red")
+        resultado_label_inicio.config(text="Contraseña Incorrecta", fg="red")
         boton_recuperar_inicio.grid()
         boton_registrarse_inicio.grid_remove()
         resultado=False
