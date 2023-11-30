@@ -6,7 +6,7 @@ import csv
 def verificar_datos(usuario):
     resultado = False
     lista_retornable=[None,None,None,None,None,None]
-    with open('registro.csv', 'r') as archivo:
+    with open('obj1/modulos/registro.csv', 'r') as archivo:
         lineas = csv.reader(archivo)
         for linea in lineas:    
             if linea[0] == usuario:

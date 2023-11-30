@@ -156,22 +156,6 @@ def cambiar_texto(resultado):
         texto_mensaje_enviado.config(text="No se envio el mensaje",fg="red")
            
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-            
-#Esta funcion debe recibir el nombre de usuario, RECORDAR
 
 
-interfaz_enviado_mensajes("tomas_23")
+

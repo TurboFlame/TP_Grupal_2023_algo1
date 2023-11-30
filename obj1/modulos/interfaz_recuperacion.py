@@ -2,41 +2,15 @@ from tkinter import *
 from interfaz_iniciar_sesion import*
 import csv
 
-def obtener_pregunta(usuario):
+def obtener_todo(usuario):
     pregunta_importante = ""
     with open('obj1/modulos/registro.csv', 'r') as archivo:
-        for linea in archivo:
-            datos = linea.strip().split(',')
-            if datos[0] == usuario:
-                pregunta_importante = datos[2]
-    return pregunta_importante
-
-def obtener_respuesta(usuario):
-    respuesta_importante = ""
-    with open('obj1/modulos/registro.csv', 'r') as archivo:
-        for linea in archivo:
-            datos = linea.strip().split(',')
-            if datos[0] == usuario:
-               respuesta_importante = datos[3]
-    return respuesta_importante
-
-def obtener_contraseña(usuario):
-    contraseña_importante = ""
-    with open('obj1/modulos/registro.csv', 'r') as archivo:
-        for linea in archivo:
-            datos = linea.strip().split(',')
-            if datos[0] == usuario:
-               contraseña_importante = datos[1]
-    return contraseña_importante
-
-def obtener_intentos(usuario):
-    intentos = 0
-    with open('obj1/modulos/registro.csv', 'r') as archivo:
-        for linea in archivo:
-            datos = linea.strip().split(',')
-            if datos[0] == usuario:
-                intentos = int(datos[4])
-    return intentos
+        lineas = csv.reader(archivo)
+        for linea in lineas:
+            if linea[0] == usuario:
+                lista_de_todo=[]
+                lista_de_todo=linea
+    return lista_de_todo
 
 def actualizar_intentos(usuario, nuevos_intentos):
     registros = []
@@ -52,9 +26,13 @@ def actualizar_intentos(usuario, nuevos_intentos):
 
 def verificar_y_mostrar(entry_respuesta, resultado_label, usuario, intentos_label):
     respuesta_usuario = entry_respuesta.get()
-    respuesta_correcta = obtener_respuesta(usuario)
-    intentos = obtener_intentos(usuario)
-    contraseña_correcta=obtener_contraseña(usuario)
+    de_todo= obtener_todo(usuario)
+    respuesta_correcta = de_todo[3]
+    print(de_todo)
+    print(de_todo[3])
+    intentos = int(de_todo[4])
+    contraseña_correcta=de_todo[1]
+    pregunta=de_todo[1]
 
     if intentos >= 3:
         mensaje = "Usuario bloqueado. Demasiados intentos fallidos."
@@ -83,9 +61,7 @@ def crear_interfaz_recuperacion(usuario):
     frame_interno = Frame(frame_inicio, bg='Snow2')
     frame_interno.grid(row=0, column=0, padx=10, pady=10)
 
-    pregunta = obtener_pregunta(usuario)
-
-    label_pregunta = Label(frame_interno, text=pregunta + ':', font=('Arial', 16), bg='Snow2')
+    label_pregunta = Label(frame_interno, text=verificar_datos(usuario)[2] + ':', font=('Arial', 16), bg='Snow2')
     label_pregunta.grid(row=0, column=0, padx=10, pady=10, sticky='e')
 
     entry_respuesta = Entry(frame_interno, font=('Arial', 14))
