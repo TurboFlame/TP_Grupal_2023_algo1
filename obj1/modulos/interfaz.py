@@ -3,6 +3,7 @@ from atbash_cesar import cifrar_atbash, cifrar_cesar
 from igu_enviado_mensajes import *
 from interfaz_registro import crear_ventana_registro
 from interfaz_iniciar_sesion import *
+from obj1.modulos.interfaz_recuperacion import recuperacion_contraseña
 # Función para mostrar la ventana principal
 def mostrar_ventana_principal(usuario=None):
     print(usuario)
@@ -121,7 +122,7 @@ def crear_ventana_inicio():
     boton_registrarse_inicio.grid(row=4, column=0, columnspan=2, pady=10)
     boton_registrarse_inicio.grid_remove()
 
-    boton_recuperar_inicio = Button(frame_interno, text="Recuperar Contraseña", command=lambda:crear_ventana(entry_usuario_inicio.get()), font=('Arial', 14))
+    boton_recuperar_inicio = Button(frame_interno, text="Recuperar Contraseña", command=lambda:recuperacion_contraseña(entry_usuario_inicio.get()), font=('Arial', 14))
     boton_recuperar_inicio.grid(row=4, column=0, columnspan=2, pady=10)
     boton_recuperar_inicio.grid_remove()
 

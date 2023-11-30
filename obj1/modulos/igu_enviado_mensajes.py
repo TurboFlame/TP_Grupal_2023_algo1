@@ -15,7 +15,7 @@ from tkinter import *
 
 def interfaz_enviado_mensajes(usuario=None):
     
-
+    
     raiz_enviado=Tk()
     raiz_enviado.title("Programa ultra secreto Losange: Enviar mensajes")
     raiz_enviado.config(bg="red",relief="groove",bd=40)
@@ -37,6 +37,12 @@ def interfaz_enviado_mensajes(usuario=None):
 
     texto_clave=Label(frame_mensajes,text="Ingrese una\nclave (solo\npara cifrado\ncesar",bg="pink")
     texto_clave.grid(row=2,column=0,pady=30,padx=30)
+    
+    
+    global texto_mensaje_enviado
+    
+    texto_mensaje_enviado=Label(frame_mensajes,text="Interfaz de enviado de mensajes",bg="pink",fg="blue")
+    texto_mensaje_enviado.grid(row=4,column=1,pady=30,padx=30)
 
 
 
@@ -67,7 +73,7 @@ def interfaz_enviado_mensajes(usuario=None):
 
 
 
-
+    
 
 
 
@@ -92,7 +98,7 @@ def agregar_mensaje(destinatario,mensaje,codificador,clave,usuario):
     
     
     
-    if True:
+    if chequeo_usuario(destinatario):
         
         with open("mensajes.csv","a",newline="") as archivo_mensajes:
             lector=csv.writer(archivo_mensajes)
@@ -116,9 +122,9 @@ def agregar_mensaje(destinatario,mensaje,codificador,clave,usuario):
             
 def chequeo_usuario(usuario):
     
+    coincidencia=False
     
-    
-    with open("archivo.csv","r",newline="") as archivo_usuarios:
+    with open("registro.csv","r",newline="") as archivo_usuarios:
         lector=csv.reader(archivo_usuarios)
         coincidencia=False
         linea=next(lector,None)
@@ -133,8 +139,8 @@ def chequeo_usuario(usuario):
                 
                     
             
-            
-            
+       
+    cambiar_texto(coincidencia)        
             
     return coincidencia       
         
@@ -143,6 +149,14 @@ def chequeo_usuario(usuario):
         
         
     
+def cambiar_texto(resultado):
+    
+    
+    if resultado:
+        texto_mensaje_enviado.config(text="Se envio el mensaje",fg="green") 
+    else:
+        texto_mensaje_enviado.config(text="No se envio el mensaje",fg="red")
+           
     
     
     
