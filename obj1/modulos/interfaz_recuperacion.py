@@ -1,108 +1,93 @@
-from tkinter import*
+from tkinter import *
+from interfaz_iniciar_sesion import*
 import csv
 
-from interfaz_iniciar_sesion import verificar_datos
+def obtener_pregunta(usuario):
+    pregunta_importante = ""
+    with open('obj1/modulos/registro.csv', 'r') as archivo:
+        for linea in archivo:
+            datos = linea.strip().split(',')
+            if datos[0] == usuario:
+                pregunta_importante = datos[2]
+    return pregunta_importante
 
-def recuperacion_contraseña(usuario="Placeholder"):
-    raiz_recuperacion_contraseña=Tk()
-    raiz_recuperacion_contraseña.title('RECUPERACION DE CLAVE')
-    raiz_recuperacion_contraseña.geometry('1000x500')
-    raiz_recuperacion_contraseña.resizable(0,0)
-    raiz_recuperacion_contraseña.config(bg='blue', relief='groove', bd=25)
+def obtener_respuesta(usuario):
+    contraseña_importante = ""
+    with open('obj1/modulos/registro.csv', 'r') as archivo:
+        for linea in archivo:
+            datos = linea.strip().split(',')
+            if datos[0] == usuario:
+               contraseña_importante = datos[3]
+    return contraseña_importante
 
-    frame_recuperacion_contraseña=Frame()
-    frame_recuperacion_contraseña.pack()
-    frame_recuperacion_contraseña.config(width='1000', height='500', bg='sky blue', relief='sunken', bd=35)
+def obtener_intentos(usuario):
+    intentos = 0
+    with open('obj1/modulos/registro.csv', 'r') as archivo:
+        for linea in archivo:
+            datos = linea.strip().split(',')
+            if datos[0] == usuario:
+                intentos = int(datos[4])
+    return intentos
 
+def actualizar_intentos(usuario, nuevos_intentos):
+    registros = []
+    with open('obj1/modulos/registro.csv', 'r') as archivo:
+        for linea in archivo:
+            datos = linea.strip().split(',')
+            if datos[0] == usuario:
+                datos[4] = str(nuevos_intentos)
+            registros.append(','.join(datos))
+    
+    with open('obj1/modulos/registro.csv', 'w') as archivo:
+        archivo.write('\n'.join(registros))
 
+def verificar_y_mostrar(entry_respuesta, resultado_label, usuario, intentos_label):
+    respuesta_usuario = entry_respuesta.get()
+    respuesta_correcta = obtener_respuesta(usuario)
+    intentos = obtener_intentos(usuario)
 
-    intentos=3
-    #INTRODUCIR AL TEXT LA FUNCION QUE RETORNE LA PREGUNTA AL USUARIO ASIGNADO CSV
-    comentario_recuperacion_contraseña=Label(frame_recuperacion_contraseña, text=None).place(x=100 ,y=50 )
-    comentario_recuperacion_contraseña=Label(frame_recuperacion_contraseña, text='Introduzca la respuesta:', font=('Arial', 12)).place(x=100 ,y=150 )
-    
-    
-    
-    
-    comentario_intentos=Label(frame_recuperacion_contraseña, text="Tiene " + str(intentos) +" intentos restantes").place(x=300,y=150)
-    
-    
-    
-    
-    respuesta_de_usuario_recuperacion_contraseña= Entry(frame_recuperacion_contraseña, width=80)
-    respuesta_de_usuario_recuperacion_contraseña.place(x=100,y=200)
-    
-    
-    
-    
-    
-    print(verificar_datos(usuario)[2])
-    texto_pregunta=Label(frame_recuperacion_contraseña,text=verificar_datos(usuario)[2])
-    texto_pregunta.place(x=150,y=240)
-    
-    boton_recuperar= Button(frame_recuperacion_contraseña,text="Recuperar contraseña",command=lambda:contraseña_correcta(verificar_datos(usuario)[1]) if checkear_respuesta(usuario,respuesta_de_usuario_recuperacion_contraseña.get())else intentos-1
-    
-    
-    boton_recuperar.place(x=150,y=200)
-    
-    
-    raiz_recuperacion_contraseña.mainloop()
-    
-    
-    
-    
-    
-    
-    
-    
-    
-def checkear_respuesta(usuario,entrada_respuesta):
-    
-    datos=verificar_datos(usuario)
-    
-    contraseña=datos[1]
-    respuesta=datos[3]  
-    contraseña_valida=False
-    
-    if respuesta==entrada_respuesta:
-        
-        contraseña_valida=True
-    
-        
-    return contraseña_valida    
-        
-          
-        
-    
-    
-def contraseña_correcta(contraseña):
-    print()    
-    
-def contraseña_incorrecta(intentos):
-    print()    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    if intentos >= 3:
+        mensaje = "Usuario bloqueado. Demasiados intentos fallidos."
+        resultado_label.config(text=mensaje, fg='red')  
+    elif respuesta_usuario == respuesta_correcta:
+        mensaje = "Respuesta correcta. Contraseña: " + respuesta_correcta
+        intentos_label.config(text="")
+    else:
+        mensaje = "Respuesta incorrecta"
+        intentos += 1
+        actualizar_intentos(usuario, intentos)
 
-    
-    
-        
+    intentos_label.config(text="Intentos fallidos: " + str(intentos))
+    resultado_label.config(text=mensaje)
 
 
+def crear_interfaz_recuperacion(usuario):
+    raiz_inicio = Tk()
+    raiz_inicio.title('Iniciar Sesión')
+    raiz_inicio.geometry('400x200')
+    raiz_inicio.config(bg='LightSkyBlue2', relief='ridge', bd=35)
 
+    frame_inicio = Frame(raiz_inicio, bg='Snow1', bd=5, relief='sunken')
+    frame_inicio.pack(expand=True)
 
+    frame_interno = Frame(frame_inicio, bg='Snow2')
+    frame_interno.grid(row=0, column=0, padx=10, pady=10)
 
+    pregunta = obtener_pregunta(usuario)
 
+    label_pregunta = Label(frame_interno, text=pregunta + ':', font=('Arial', 16), bg='Snow2')
+    label_pregunta.grid(row=0, column=0, padx=10, pady=10, sticky='e')
 
+    entry_respuesta = Entry(frame_interno, font=('Arial', 14))
+    entry_respuesta.grid(row=0, column=1, padx=10, pady=10)
 
+    resultado_label = Label(frame_interno, text="", font=('Arial', 14), bg='Snow2')
+    resultado_label.grid(row=2, columnspan=2, pady=10)
 
+    intentos_label = Label(frame_interno, text="Intentos fallidos: 0", font=('Arial', 14), bg='Snow2')
+    intentos_label.grid(row=3, columnspan=2, pady=10)
 
+    boton_verificar = Button(frame_interno, text="Verificar", command=lambda: verificar_y_mostrar(entry_respuesta, resultado_label, usuario, intentos_label), font=('Arial', 14), fg='black', padx=10, pady=5)
+    boton_verificar.grid(row=1, columnspan=2, pady=10)
 
-
-recuperacion_contraseña()
+    raiz_inicio.mainloop()

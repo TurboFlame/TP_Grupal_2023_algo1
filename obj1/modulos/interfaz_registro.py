@@ -6,7 +6,7 @@ def usuario_existente(nombre_usuario): #funcion para verificar si el usuario ya 
     usuarios_existentes = {}
     
     try:
-        with open('registro4.csv', 'r') as archivo:
+        with open('obj1/modulos/registro.csv', 'r') as archivo:
             lector_csv = csv.reader(archivo)
             for fila in lector_csv:
                 usuarios_existentes[fila[0]] = True
@@ -30,9 +30,9 @@ def guardar_registro(entrada_usuario, entrada_contraseña, pregunta, entrada_res
     elif not validar_clave(contraseña):
         label_registro.config(text="Contraseña inválida", fg='red')
     else:
-        with open('registro4.csv', 'a', newline='') as archivo:
+        with open('obj1/modulos/registro.csv', 'a', newline='') as archivo:
             escritor_csv = csv.writer(archivo)
-            escritor_csv.writerow([usuario, contraseña, pregunta_seleccionada, respuesta])
+            escritor_csv.writerow([usuario, contraseña, pregunta_seleccionada, respuesta,0])
 
         label_registro.config(text="Registro correcto", fg='green')
         

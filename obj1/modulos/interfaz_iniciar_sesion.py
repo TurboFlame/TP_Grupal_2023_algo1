@@ -8,20 +8,14 @@ def verificar_datos(usuario):
     pregunta = ""
     contraseña_correcta = ""
     lista_retornable=[None,None,None,None,None]
-    with open('registro.csv', 'r') as archivo:
+    with open('obj1/modulos/registro.csv', 'r') as archivo:
         lineas = csv.reader(archivo)
-        for linea in lineas:
-            
-
+        for linea in lineas:    
             if linea[0] == usuario:
                 resultado = True
                 lista_retornable=linea
-                
- 
         
         lista_retornable.append(resultado)
-        
-       
         print(lista_retornable)
     return lista_retornable
 
@@ -33,18 +27,11 @@ def verificar(entry_usuario_inicio, entry_contraseña_inicio, resultado_label_in
     contraseña = entry_contraseña_inicio.get()
     datos=[None,None,None,None,None]
     datos = verificar_datos(usuario)
-    print(datos)
-    
     usuario_datos=datos[0]
     contraseña_datos=datos[1]
     pregunta_datos=datos[2]
     respuesta_datos=datos[3]
     resultado=datos[4]
-    
-
-    
-    
-    
     
     if usuario==usuario_datos and contraseña != contraseña_datos:
         resultado_label_inicio.config(text="Datos Incorrectos", fg="red")
@@ -59,21 +46,5 @@ def verificar(entry_usuario_inicio, entry_contraseña_inicio, resultado_label_in
         resultado=False
         boton_registrarse_inicio.grid()
         boton_recuperar_inicio.grid_remove()
-    return(resultado,usuario)    
-
-
-def crear_ventana():
-    ventana = Tk()
-    ventana.title("ventana de recuperacion")
-    
-    
-    marco = Frame(ventana)
-    marco.pack(padx=10, pady=10)
-
-    ventana.mainloop()
-
-    
-
-
-
+    return(resultado,usuario) 
 
