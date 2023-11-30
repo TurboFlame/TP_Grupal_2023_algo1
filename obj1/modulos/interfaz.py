@@ -53,7 +53,7 @@ def mostrar_ventana_principal(usuario=None):
     limpieza = Button(miFrame, text='Limpiar', command=limpiar_cuadros)
     limpieza.place(x=300, y=450)
     #limpieza.grid(row=4, column=0, padx=10, pady=10)
-    boton_enviado=Button(miFrame,text="Enviar mensajes",command=lambda:interfaz_enviado_mensajes(usuario))
+    boton_enviado=Button(miFrame,text="Enviar mensajes",command=lambda:interfaz_enviado_mensajes(usuario,raiz))
     boton_enviado.place(x=280,y=490)
     
     

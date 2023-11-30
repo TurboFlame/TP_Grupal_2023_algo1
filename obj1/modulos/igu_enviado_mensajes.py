@@ -8,12 +8,17 @@ Created on 25 nov. 2023
 
 import csv
 from tkinter import *
+from interfaz_registro import retroceder
 
 
 
 
-
-def interfaz_enviado_mensajes(usuario=None):
+def interfaz_enviado_mensajes(usuario=None, raiz=None):
+    
+    
+    if raiz!=None:
+        raiz.withdraw()
+        
     
     
     raiz_enviado=Tk()
@@ -42,7 +47,7 @@ def interfaz_enviado_mensajes(usuario=None):
     global texto_mensaje_enviado
     
     texto_mensaje_enviado=Label(frame_mensajes,text="Interfaz de enviado de mensajes",bg="pink",fg="blue")
-    texto_mensaje_enviado.grid(row=4,column=1,pady=30,padx=30)
+    texto_mensaje_enviado.grid(row=4,column=1,pady=30)
 
 
 
@@ -69,23 +74,16 @@ def interfaz_enviado_mensajes(usuario=None):
 
 
     boton_enviar=Button(frame_mensajes,text="Enviar mensaje",command=lambda: agregar_mensaje(entrada_destinatario.get("1.0", "end-1c"),entrada_mensaje.get("1.0", "end-1c"),clave_codificacion.get(),entrada_clave.get("1.0", "end-1c"),usuario))
-    boton_enviar.grid(row=4,column=0,pady=210,padx=40)
+    boton_enviar.grid(row=4,column=0,pady=160)
 
-
-
+    boton_retroceder=Buttonboton_enviar=Button(frame_mensajes,text="Retroceder",command=lambda:retroceder(raiz,raiz_enviado))
+    boton_retroceder.place(x=330,y=570)
     
-
-
-
-
-
-
-
 
     raiz_enviado.mainloop()
     
     
-    
+ 
     
 
 def agregar_mensaje(destinatario,mensaje,codificador,clave,usuario):    
@@ -176,4 +174,4 @@ def cambiar_texto(resultado):
 #Esta funcion debe recibir el nombre de usuario, RECORDAR
 
 
-
+interfaz_enviado_mensajes("tomas_23")
