@@ -101,4 +101,3 @@ def crear_interfaz_recuperacion(usuario):
     boton_verificar.grid(row=1, columnspan=2, pady=10)
 
     raiz_inicio.mainloop()
-crear_interfaz_recuperacion("facundo_12") 
