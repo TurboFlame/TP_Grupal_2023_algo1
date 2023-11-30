@@ -45,12 +45,12 @@ def guardar_preguntas_en_csv(preguntas, archivo='preguntas.csv'):
             writer.writerow([pregunta])
 
 def crear_ventana_registro():
-    raiz5 = Tk()
-    raiz5.title('Registro de Usuario')
-    raiz5.geometry('1000x500')
-    raiz5.config(bg='LightSkyBlue2', relief='ridge', bd=35, width=300, height=150)
+    raiz_usuario = Tk()
+    raiz_usuario.title('Registro de Usuario')
+    raiz_usuario.geometry('1000x500')
+    raiz_usuario.config(bg='LightSkyBlue2', relief='ridge', bd=35, width=300, height=150)
 
-    frame_principal = Frame(raiz5, bg='Snow2', bd=5, relief='sunken', width=400, height=300)
+    frame_principal = Frame(raiz_usuario, bg='Snow2', bd=5, relief='sunken', width=400, height=300)
     frame_principal.pack(expand=True)
 
     frame_interno = Frame(frame_principal, bg='Snow2')
@@ -96,7 +96,7 @@ def crear_ventana_registro():
     boton_registrar = Button(frame_interno, text="Registrarse", command=lambda: guardar_registro(entrada_usuario, entrada_contraseña, pregunta, entrada_respuesta, label_registro), font=('Arial', 14))
     boton_registrar.grid(row=5, column=0, columnspan=10, pady=10)
 
-    raiz5.mainloop()
+    raiz_usuario.mainloop()
 
 if __name__ == "__main__":
     crear_ventana_registro()
