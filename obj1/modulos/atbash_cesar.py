@@ -26,14 +26,14 @@ def cifrar_cesar(contraseña, clave):
 
     contraseña_codificada = ""
     letras_invalidas = "áéíóúÁÉÍÓÚ"
-
+    ABECEDARIO=26
     for letra in contraseña:
         if letra.islower() and letra not in letras_invalidas:
             unicode = ord(letra)
-            contraseña_codificada += chr(97 + (unicode + clave - 97) % 26).lower()
+            contraseña_codificada += chr(97 + (unicode + clave - 97) % ABECEDARIO).lower()
         elif letra.isupper() and letra not in letras_invalidas:
             unicode = ord(letra)
-            contraseña_codificada += chr(65 + (unicode + clave - 65) % 26).upper()
+            contraseña_codificada += chr(65 + (unicode + clave - 65) % ABECEDARIO).upper()
         elif letra.isdigit():
             unicode_int = int(ord(letra))
             contraseña_codificada += chr((unicode_int + clave - 48) % 10 + 48)

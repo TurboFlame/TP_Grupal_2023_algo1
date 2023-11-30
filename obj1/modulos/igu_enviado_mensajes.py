@@ -93,7 +93,7 @@ def agregar_mensaje(destinatario,mensaje,codificador,clave,usuario):
     
 
     
-    print(codificador)
+    
     
     
     

@@ -32,7 +32,7 @@ def guardar_registro(entrada_usuario, entrada_contraseña, pregunta, entrada_res
     else:
         with open('obj1/modulos/registro.csv', 'a', newline='') as archivo:
             escritor_csv = csv.writer(archivo)
-            escritor_csv.writerow([usuario, contraseña, pregunta_seleccionada, respuesta, 0])
+            escritor_csv.writerow([usuario, contraseña, pregunta_seleccionada, respuesta,0])
 
         label_registro.config(text="Registro correcto", fg='green')
         
@@ -44,7 +44,12 @@ def guardar_preguntas_en_csv(preguntas, archivo='preguntas.csv'):
         for pregunta in preguntas:
             writer.writerow([pregunta])
 
-def crear_ventana_registro():
+def crear_ventana_registro(raiz=None):
+    
+    
+    if not raiz==None:
+        raiz.withdraw()
+    
     raiz_usuario = Tk()
     raiz_usuario.title('Registro de Usuario')
     raiz_usuario.geometry('1000x500')
@@ -95,8 +100,25 @@ def crear_ventana_registro():
 
     boton_registrar = Button(frame_interno, text="Registrarse", command=lambda: guardar_registro(entrada_usuario, entrada_contraseña, pregunta, entrada_respuesta, label_registro), font=('Arial', 14))
     boton_registrar.grid(row=5, column=0, columnspan=10, pady=10)
+    
+    boton_atras=Button(frame_interno,text="Retroceder",command=lambda:retroceder(raiz,raiz_usuario))
+    boton_atras.grid(row=5,column=0)
+    
+    
 
     raiz_usuario.mainloop()
+
+
+def retroceder(raiz_abrir,raiz_cerrar):
+    raiz_cerrar.withdraw()
+    raiz_abrir.deiconify()
+    
+    
+    
+
+
+
+
 
 if __name__ == "__main__":
     crear_ventana_registro()

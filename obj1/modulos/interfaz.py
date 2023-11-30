@@ -32,7 +32,7 @@ def mostrar_ventana_principal(usuario=None):
     clave_entry.grid(row=1, column=1, padx=10, pady=10)
 
     # Barras de desplazamiento para los cuadros de texto
-    
+     
     cuadro_metodo1_scrollbar = Scrollbar(miFrame, orient=VERTICAL)
     cuadro_resultado2_scrollbar = Scrollbar(miFrame, orient=VERTICAL)
 
@@ -55,6 +55,10 @@ def mostrar_ventana_principal(usuario=None):
     #limpieza.grid(row=4, column=0, padx=10, pady=10)
     boton_enviado=Button(miFrame,text="Enviar mensajes",command=lambda:interfaz_enviado_mensajes(usuario))
     boton_enviado.place(x=280,y=490)
+    
+    
+    
+    
     def cifrar_mensaje_cesar():
         mensaje = mensaje_entry.get()
         clave = int(clave_entry.get())
@@ -151,7 +155,7 @@ def iniciar_interfaz():
     boton_inicial = Button(miFrame2, text='CONTINUAR', fg='red', font='sans', command=lambda: mostrar_ventana_principal())
     boton_inicial.place(x=600, y=80)
 
-    boton_registro = Button(miFrame2, text='REGISTRARSE', fg='red', font='sans', command=crear_ventana_registro)
+    boton_registro = Button(miFrame2, text='REGISTRARSE', fg='red', font='sans', command=lambda:crear_ventana_registro(raiz2))
     boton_registro.place(x=400, y=80)
 
     boton_iniciar_sesion = Button(miFrame2, text='INICIAR SESION', fg='red', font='sans', command=crear_ventana_inicio)
