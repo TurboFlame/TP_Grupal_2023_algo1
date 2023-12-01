@@ -1,7 +1,9 @@
 from tkinter import *
-
 import csv
 
+'''
+Autor: GUILLE
+'''
 # busca y verifica el usuario correspondiente del archivo para retornar toda la fila de este.
 def verificar_datos(usuario):
     resultado = False

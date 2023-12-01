@@ -2,6 +2,9 @@ from tkinter import *
 from interfaz_iniciar_sesion import*
 import csv
 
+'''
+Autor: LEONEL, GUILLE
+'''
 def obtener_todo(usuario):
     pregunta_importante = ""
     with open('obj1/modulos/registro.csv', 'r') as archivo:
