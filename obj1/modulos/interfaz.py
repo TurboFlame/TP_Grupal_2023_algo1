@@ -4,6 +4,8 @@ from igu_enviado_mensajes import *
 from interfaz_registro import crear_ventana_registro
 from interfaz_iniciar_sesion import *
 from interfaz_recuperacion import crear_interfaz_recuperacion
+from interfaz_consultar_mensajes import consultar_mensajes
+
 # Función para mostrar la ventana principal
 def mostrar_ventana_principal(usuario=None):
     print(usuario)
@@ -160,6 +162,9 @@ def iniciar_interfaz():
 
     boton_iniciar_sesion = Button(miFrame2, text='INICIAR SESION', fg='red', font='sans', command=crear_ventana_inicio)
     boton_iniciar_sesion.place(x=800, y=80)
+
+    boton_consultar_mensajes = Button(miFrame2, text='Consultar Mensajes', fg='red', font='sans', command=consultar_mensajes)
+    boton_consultar_mensajes.place(x=1000, y=80)
 
     miImagen2 = PhotoImage(file='chico.png')
     foto_grupo = Label(image=miImagen2, width='800', height='450')
