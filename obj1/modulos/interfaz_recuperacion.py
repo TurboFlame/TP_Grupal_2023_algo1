@@ -2,6 +2,9 @@ from tkinter import *
 from interfaz_iniciar_sesion import*
 import csv
 
+'''
+Autor: LEONEL
+'''
 def obtener_todo(usuario):
     pregunta_importante = ""
     with open('obj1/modulos/registro.csv', 'r') as archivo:
@@ -12,18 +15,24 @@ def obtener_todo(usuario):
                 lista_de_todo=linea
     return lista_de_todo
 
+'''
+Autor: LEONEL
+'''
 def actualizar_intentos(usuario, nuevos_intentos):
     registros = []
     with open('obj1/modulos/registro.csv', 'r') as archivo:
-        for linea in archivo:
-            datos = linea.strip().split(',')
-            if datos[0] == usuario:
-                datos[4] = str(nuevos_intentos)
-            registros.append(','.join(datos))
+        lineas = csv.reader(archivo)
+        for linea in lineas:
+            if linea[0] == usuario:
+                linea[4] = str(nuevos_intentos)
+            registros.append(','.join(linea))
     
     with open('obj1/modulos/registro.csv', 'w') as archivo:
         archivo.write('\n'.join(registros))
 
+'''
+Autor: LEONEL
+'''
 def verificar_y_mostrar(entry_respuesta, resultado_label, usuario, intentos_label):
     respuesta_usuario = entry_respuesta.get()
     de_todo= obtener_todo(usuario)
@@ -48,7 +57,9 @@ def verificar_y_mostrar(entry_respuesta, resultado_label, usuario, intentos_labe
     intentos_label.config(text="Intentos fallidos: " + str(intentos))
     resultado_label.config(text=mensaje)
 
-
+'''
+Autor: GUILLOTE
+'''
 def crear_interfaz_recuperacion(usuario):
     raiz_inicio = Tk()
     raiz_inicio.title('Iniciar Sesión')

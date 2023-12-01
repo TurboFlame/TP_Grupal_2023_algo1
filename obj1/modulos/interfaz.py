@@ -98,7 +98,10 @@ def mostrar_ventana_principal(usuario=None):
     descifrar_atbash_button.grid(row=6, column=1, padx=10, pady=10)
 
     raiz.mainloop()
-    
+
+'''
+Autor: GUILLOTE
+'''
 def crear_ventana_inicio():
     raiz_inicio = Tk()
     raiz_inicio.title('Iniciar Sesion')
@@ -140,6 +143,10 @@ def crear_ventana_inicio():
     resultado_label_inicio.grid(row=7, column=0, columnspan=5, pady=10)
 
     raiz_inicio.mainloop()
+
+'''
+Autor: LEONEL
+'''
 def iniciar_interfaz():
     raiz2 = Tk()
     raiz2.title('TP Grupal Parte 1 - Grupo: Losange')

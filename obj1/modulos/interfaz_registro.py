@@ -2,6 +2,9 @@ from tkinter import *
 from validar import validar_usuario, validar_clave
 import csv
 
+'''
+Autor: BRIAN, REYES
+'''
 def usuario_existente(nombre_usuario): #funcion para verificar si el usuario ya está registrado
     usuarios_existentes = {}
     
