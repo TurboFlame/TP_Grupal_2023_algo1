@@ -123,19 +123,13 @@ def crear_ventana_inicio():
     label_contraseña_inicio = Label(frame_interno, text='Contraseña:', font=('Arial', 16), bg='Snow2')
     label_contraseña_inicio.grid(row=1, column=0, padx=10, pady=10, sticky='e')
 
-    entry_contraseña_inicio = Entry(frame_interno, font=('Arial', 14))
-    entry_contraseña_inicio.grid(row=1, column=1, padx=50, pady=10)
+    entry_contraseña_inicio = Entry(frame_interno, show='*', font=('Arial', 14))
+    entry_contraseña_inicio.grid(row=1, column=1, padx=10, pady=10)
 
 
     boton_registrarse_inicio = Button(frame_interno, text="Registrarse",command=crear_ventana_registro, font=('Arial', 14))
     boton_registrarse_inicio.grid(row=4, column=0, columnspan=2, pady=10)
     boton_registrarse_inicio.grid_remove()
-
-    def mostrar_contraseña():
-        entry_contraseña_inicio.config(show='*') 
-
-    ocultar_contraseña = Button(frame_interno, text='⨷', font=('Arial', 16), bg='Snow2', command=lambda: mostrar_contraseña)
-    ocultar_contraseña.grid(row=1, column=1, padx=7, pady=10, sticky='e')
 
     boton_recuperar_inicio = Button(frame_interno, text="Recuperar Contraseña", command=lambda:crear_interfaz_recuperacion(entry_usuario_inicio.get()), font=('Arial', 14))
     boton_recuperar_inicio.grid(row=4, column=0, columnspan=2, pady=10)
