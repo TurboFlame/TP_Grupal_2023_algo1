@@ -21,11 +21,11 @@ Autor: LEONEL
 def actualizar_intentos(usuario, nuevos_intentos):
     registros = []
     with open('obj1/modulos/registro.csv', 'r') as archivo:
-        for linea in archivo:
-            datos = linea.strip().split(',')
-            if datos[0] == usuario:
-                datos[4] = str(nuevos_intentos)
-            registros.append(','.join(datos))
+        lineas = csv.reader(archivo)
+        for linea in lineas:
+            if linea[0] == usuario:
+                linea[4] = str(nuevos_intentos)
+            registros.append(','.join(linea))
     
     with open('obj1/modulos/registro.csv', 'w') as archivo:
         archivo.write('\n'.join(registros))
