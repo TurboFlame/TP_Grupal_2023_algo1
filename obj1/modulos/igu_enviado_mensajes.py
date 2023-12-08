@@ -96,7 +96,7 @@ def agregar_mensaje(destinatario,mensaje,codificador,clave,usuario):
     
     
     
-    if chequeo_usuario(destinatario):
+    if chequeo_usuario(destinatario) or destinatario=="*":
         
         with open("mensajes.csv","a",newline="") as archivo_mensajes:
             lector=csv.writer(archivo_mensajes)
@@ -120,7 +120,7 @@ def agregar_mensaje(destinatario,mensaje,codificador,clave,usuario):
             
 def chequeo_usuario(usuario):
     
-    coincidencia=False
+    
     
     with open("registro.csv","r",newline="") as archivo_usuarios:
         lector=csv.reader(archivo_usuarios)
@@ -130,7 +130,7 @@ def chequeo_usuario(usuario):
         while linea is not None and not coincidencia:
             
             
-            if linea[0]==usuario:
+            if linea[0]==usuario or usuario=="*":
                 coincidencia=True
             else:
                 linea=next(lector,None)
